@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Pfad zur Datei mit SQL-Befehlen zur Initialisierung der Datenbank-Struktur
 #
 # Hinweis: Auf dem Server wird das Projektverzeichnis unter dem Verzeichnis "/vagrant" verfügbar gemacht.
