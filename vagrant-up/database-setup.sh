@@ -11,8 +11,8 @@ if [ -f "${database_init_script}" ];
 then
     mysql -uroot -ppassword default_database < "${database_init_script}"
 
-    if [ -f "{$database_content_script}" ];
+    if [ -f "${database_content_script}" ];
     then
-        mysql -uroot -ppassword default_database < "{$database_content_script}"
+        mysql -uroot -ppassword default_database < "${database_content_script}"
     fi
 fi
