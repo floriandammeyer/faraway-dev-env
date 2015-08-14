@@ -1,0 +1,11 @@
+---
+#
+# Prerequisites for installing PHP5
+#
+
+- name: install required python packages
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  sudo: true
+  with_items:
+    - python-apt
+    - python-pycurl

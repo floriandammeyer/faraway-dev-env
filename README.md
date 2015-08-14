@@ -1,6 +1,15 @@
+# NOTIZ: die Readme-Datei bedarf Überarbeitung, da die Angaben nicht mehr den Tatsachen entsprechen!
+# TODO: Konfigurationsmöglichkeit für Ansible außerhalb des vagrant-Verzeichnisses ablegen, damit man innerhalb des vagrant-Ordners keine Dateien ändern muss wenn man z. B. nginx statt Apache haben möchte, sodass man das Vagrant-Verzeichnis als Git-Subrepo einrichten kann?
+
 ## Installation
-Den Inhalt des Repositorys einfach ins Wurzelverzeichnis des Projekts kopieren. Schon kann mit "vagrant up" ein
-virtueller Webserver für das jeweilige Projekt gestartet werden.
+Den Inhalt des Repositorys einfach ins Wurzelverzeichnis des Projekts kopieren. Danach muss die Datei 
+"Vagrantfile.sample" aus dem Ordner "vagrant-up" ins Wurzelverzeichnis des Projekts kopiert und in "Vagrantfile" 
+umbenannt werden, damit Vagrant sie finden kann. Auf diese Weise kann man das Repository der Entwicklungsumgebung 
+als Git-Submodule ins Projekt einbinden und bleibt automatisch auf dem aktuellesten Stand. 
+Danach kann mit dem Befehl "vagrant up" ein virtueller Webserver für das jeweilige Projekt gestartet werden.
+
+Die "composer.json"- und ".bowerrc"-Dateien sind bereits vorkonfiguriert, damit entsprechende Packages direkt in die 
+ richtigen Verzeichnisse unterhalb des "app"-Verzeichnisses installiert werden. 
 
 ## Zugriff auf den Server
 Es werden vier Ports der virtuellen Maschine auf den Host-Computer weitergeleitet. 

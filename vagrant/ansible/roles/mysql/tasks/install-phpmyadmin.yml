@@ -1,0 +1,12 @@
+---
+## Install and configure phpMyAdmin
+##    debconf-set-selections <<< 'phpmyadmin phpmyadmin/dbconfig-install boolean true'
+##    debconf-set-selections <<< 'phpmyadmin phpmyadmin/app-password-confirm password password'
+##    debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/admin-pass password password'
+##    debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/app-pass password password'
+##    debconf-set-selections <<< 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'
+##    apt-get -y install phpmyadmin
+#- name: Install phpMyAdmin
+#  apt: phpmyadmin update_cache=yes cache_valid_time=3600
+#  sudo: true
+# TODO: phpmyadmin in nginx aufrufbar machen, kann man einen zweiten virtualserver erstellen, der auch auf port 80 lauscht, aber auf einem symbolischen unterverzeichnis über location /phpmyadmin { }??

@@ -1,0 +1,26 @@
+---
+#
+# Installs and configures Xdebug
+#
+
+- name: install Xdebug
+  apt: pkg=php5-xdebug update_cache=yes cache_valid_time=3600
+  notify: restart php-fpm
+
+- name: copy Xdebug configuration
+  copy:
+    src: xdebug-settings.ini
+    dest: /etc/php5/conf.d/xdebug-settings.ini
+    mode: 0644
+  notify: restart php-fpm
+
+- name: ensure Xdebug profiles and traces folder exist
+  file:
+    path: /vagrant/xdebug/{{ item }}
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0666
+  with_items:
+    - profiles
+    - traces

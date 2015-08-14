@@ -1,0 +1,29 @@
+---
+#
+# Installs Apache2 and sets up a default site with PHP support via FastCGI
+#
+
+- include: prereq.yml
+
+- name: add apache2 repository
+  apt_repository: repo='ppa:ondrej/apache2' update_cache=yes
+  sudo: true
+
+- name: install apache2
+  apt: pkg=apache2 update_cache=yes cache_valid_time=3600
+  sudo: true
+
+- name: enabled mod_rewrite, proxy and proxy_fcgi
+  apache2_module: name={{ item }} state=present
+  with_items:
+    - rewrite
+    - proxy
+    - proxy_fcgi
+  notify: restart apache2
+
+- name: copy default site configuration
+  template:
+    src: sites-available/000-default.conf
+    dest: /etc/apache2/sites-available/000-default.conf
+    mode: 0644
+  notify: restart apache2

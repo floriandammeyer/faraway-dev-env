@@ -1,0 +1,25 @@
+---
+#
+# Installs the Nginx webserver
+#
+
+- name: install nginx apt package
+  sudo: true
+  apt:
+    name: nginx
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: copy nginx config file
+  template:
+    src: sites-available/default.j2
+    dest: /etc/nginx/sites-available/default
+
+- name: enable configuration
+  file:
+    dest: /etc/nginx/sites-enabled/default
+    src: /etc/nginx/sites-available/default
+    state: link
+
+- name: restart nginx
+  service: name=nginx state=restarted

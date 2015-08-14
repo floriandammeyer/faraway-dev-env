@@ -1,0 +1,27 @@
+---
+#
+# Installs the MySQL server and sets up a default database.
+#
+
+- name: Install MySQL apt packages
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  sudo: true
+  with_items:
+    - mysql-server
+    - python-mysqldb
+
+- name: Set the bind address for mysqld
+  ini_file:
+    dest: /etc/mysql/conf.d/mysqld_bind_address.cnf
+    owner: mysql
+    group: mysql
+    mode: 0644
+    section: mysqld
+    option: bind-address
+    # listen on all incoming connections
+    value: 0.0.0.0
+  notify: restart mysql
+
+- include: setup-database.yml
+
+#- include: install-phpmyadmin.yml

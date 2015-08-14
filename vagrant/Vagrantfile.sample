@@ -1,0 +1,19 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "precise64"
+
+  # configure the Vagrant shell, so no error like "stdin is not a tty" is shown
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+  # initialize the machine with a shell provisioner
+  # the shell provisioner will set up Ansible on the virtual machine and run the Ansible playbook locally
+  config.vm.provision :shell,
+    :keep_color => true,
+    :path => "vagrant/bootstrap.sh"
+
+  # Make the webserver accessible to the host
+  config.vm.network :forwarded_port, guest: 80, host: 8080
+  # Make the MySQL server accessible to the host
+  config.vm.network :forwarded_port, guest: 3306, host: 3306
+  # HTTP port for accessing mailcatcher's web interface
+  config.vm.network :forwarded_port, guest: 1080, host: 1080
+end

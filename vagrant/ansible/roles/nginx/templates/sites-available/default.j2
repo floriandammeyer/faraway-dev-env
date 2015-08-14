@@ -1,0 +1,46 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+
+    root /vagrant/{{ public_folder }};
+    index index.php index.html index.htm;
+
+    server_name localhost;
+
+    charset utf-8;
+
+    # With a PHP application, this
+    # becomes our default `location {}` block
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {
+        try_files $uri =404;
+    }
+
+    location = /favicon.ico { log_not_found off; access_log off; }
+    location = /robots.txt { log_not_found off; access_log off; }
+
+    # pass the PHP scripts to FastCGI server
+    location ~ \.php$ {
+        # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+
+        # With php5-fpm:
+        # fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+
+        include fastcgi_params;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param ENV development;
+    }
+
+    # todo: zu versteckende dateien (alles beginnend mit einem punkt, z. b. .htaccess) als nicht vorhanden (= mit 404 error) zurückgeben
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+}

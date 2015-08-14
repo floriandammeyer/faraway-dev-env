@@ -1,0 +1,35 @@
+---
+#
+# Sets a password for the root user and create a default database.
+# Then the given dump file is imported into the default database.
+#
+
+- name: Update the password for the MySQL root user for all connections
+  sudo: true
+  mysql_user:
+    host: "{{ item }}"
+    name: root
+    password: password
+    login_user: root
+    login_password: password
+    check_implicit_admin: yes
+    priv: "*.*:ALL,GRANT"
+  with_items:
+    - localhost
+    - "%"
+
+- name: Create MySQL default database
+  mysql_db:
+    name: default_database
+    state: present
+    login_user: root
+    login_password: password
+
+- name: Init MySQL default database
+  mysql_db:
+    name: default_database
+    state: import
+    target: "{{ dump_file }}"
+    login_user: root
+    login_password: password
+  ignore_errors: true

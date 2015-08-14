@@ -1,0 +1,13 @@
+---
+- name: Set up the Vagrant development server
+  hosts: localhost
+  roles:
+    - role: apache2
+      public_folder: app/public
+#    - role: nginx
+#      public_folder: app/public
+    - role: php5
+    - role: mysql
+      dump_file: /vagrant/app/data/sql/db_setup.sql
+    - role: mailcatcher
+    - role: nodejs

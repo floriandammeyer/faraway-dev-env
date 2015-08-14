@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+	ServerName localhost
+
+	ServerAdmin webmaster@localhost
+	DocumentRoot /vagrant/{{ public_folder }}
+
+	<Directory /vagrant/{{ public_folder }}>
+	    Options -Indexes +FollowSymLinks +MultiViews
+	    AllowOverride All
+	    Require all granted
+    </Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/vagrant/{{ public_folder }}/$1
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
