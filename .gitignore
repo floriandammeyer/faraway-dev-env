@@ -8,5 +8,4 @@ nbproject
 .project
 .settings
 composer.lock
-vendor
 composer.phar

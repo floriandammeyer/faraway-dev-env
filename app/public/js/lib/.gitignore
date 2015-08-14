@@ -1,0 +1,7 @@
+# This directory only contains third party code
+# which is automatically being installed by Bower,
+# so we don't have to include this
+# folder's contents in the VCS
+*
+
+!.gitignore
