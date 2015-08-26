@@ -16,4 +16,10 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 3306, host: 3306
   # HTTP port for accessing mailcatcher's web interface
   config.vm.network :forwarded_port, guest: 1080, host: 1080
+
+  # Increase memory and cpu for the VirtualBox machine
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1024
+    v.cpus = 2
+  end
 end
