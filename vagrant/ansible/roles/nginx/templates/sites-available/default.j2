@@ -7,6 +7,11 @@ server {
 
     server_name localhost;
 
+    # This has to be done because sendfile does not work well on virtual machines
+    # This being enabled resulted in truncated files!
+    # See http://www.conroyp.com/2013/04/25/css-javascript-truncated-by-nginx-sendfile/
+    sendfile off;
+
     charset utf-8;
 
     # With a PHP application, this
