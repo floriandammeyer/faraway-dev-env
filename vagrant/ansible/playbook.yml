@@ -3,11 +3,11 @@
   hosts: localhost
   roles:
     - role: apache2
-      public_folder: app/public
+      public_folder: public
 #    - role: nginx
-#      public_folder: app/public
+#      public_folder: public
     - role: php5
     - role: mysql
-      dump_file: /vagrant/app/data/sql/db_setup.sql
-    - role: mailcatcher
-    - role: nodejs
+    - role: martinmicunda.nodejs
+    - role: martinmicunda.bower
+    - role: geerlingguy.mailhog

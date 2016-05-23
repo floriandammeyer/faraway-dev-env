@@ -10,7 +10,7 @@
 - name: copy Xdebug configuration
   copy:
     src: xdebug-settings.ini
-    dest: /etc/php5/conf.d/xdebug-settings.ini
+    dest: /etc/php5/mods-available/xdebug-settings.ini
     mode: 0644
   notify: restart php-fpm
 

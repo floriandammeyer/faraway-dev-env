@@ -5,9 +5,8 @@
 
 - include: prereq.yml
 
-- name: add apt php5 repository
-  # The php5-oldstable repo contains PHP 5.4 as of writing this code (08/2015)
-  apt_repository: repo='ppa:ondrej/php5-oldstable' update_cache=yes
+- name: add apt php 5.6 repository
+  apt_repository: repo='ppa:ondrej/php5-5.6' update_cache=yes
 
 - name: install php5
   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600

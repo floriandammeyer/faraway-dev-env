@@ -1,4 +1,5 @@
 Vagrant.configure("2") do |config|
+  # Change this to "precise32" for a 32 bit environment!
   config.vm.box = "precise64"
 
   # configure the Vagrant shell, so no error like "stdin is not a tty" is shown
@@ -14,8 +15,8 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 80, host: 8080
   # Make the MySQL server accessible to the host
   config.vm.network :forwarded_port, guest: 3306, host: 3306
-  # HTTP port for accessing mailcatcher's web interface
-  config.vm.network :forwarded_port, guest: 1080, host: 1080
+  # HTTP port for accessing MailHog's web interface
+  config.vm.network :forwarded_port, guest: 8025, host: 8025
 
   # Increase memory and cpu for the VirtualBox machine
   config.vm.provider "virtualbox" do |v|

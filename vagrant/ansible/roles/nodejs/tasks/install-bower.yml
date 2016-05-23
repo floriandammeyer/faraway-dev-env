@@ -1,4 +1,0 @@
----
-- name: Install Bower
-  command: npm install -g bower creates=/usr/bin/bower
-  sudo: true

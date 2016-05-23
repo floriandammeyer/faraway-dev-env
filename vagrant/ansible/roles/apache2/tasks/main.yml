@@ -23,7 +23,7 @@
 
 - name: copy default site configuration
   template:
-    src: sites-available/000-default.conf
+    src: sites-available/000-default.conf.j2
     dest: /etc/apache2/sites-available/000-default.conf
     mode: 0644
   notify: restart apache2
